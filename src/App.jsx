@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 
+const localApiUrl = "http://localhost:5000/api/todos";
+const deployedApiUrl =
+  "https://todo-backend-e2cde5and7atd4az.eastasia-01.azurewebsites.net/api/todos";
+
 const resolvedApiUrl =
-  import.meta.env.VITE_API_URL ??
-  (import.meta.env.DEV ? "http://localhost:5000/api/todos" : "");
+  import.meta.env.VITE_API_URL ?? (import.meta.env.DEV ? localApiUrl : deployedApiUrl);
 
 export default function App() {
   const [todos, setTodos] = useState([]);
