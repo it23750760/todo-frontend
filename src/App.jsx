@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const localApiUrl = "/api/todos";
-const deployedApiUrl = "";
+const deployedApiUrl = "todo-backend-e2cde5and7atd4az.eastasia-01.azurewebsites.net";
 
 const resolvedApiUrl =
   import.meta.env.VITE_API_URL ?? (import.meta.env.DEV ? localApiUrl : deployedApiUrl);
