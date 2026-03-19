@@ -1,15 +1,24 @@
 import { useEffect, useState } from "react";
 
-const apiUrl = import.meta.env.VITE_API_URL ?? "http://localhost:5000/api/todos";
+const resolvedApiUrl =
+  import.meta.env.VITE_API_URL ??
+  (import.meta.env.DEV ? "http://localhost:5000/api/todos" : "");
 
 export default function App() {
   const [todos, setTodos] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
+    if (!resolvedApiUrl) {
+      setError(
+        "API URL is not configured. Set VITE_API_URL to your deployed backend before building the frontend."
+      );
+      return;
+    }
+
     async function loadTodos() {
       try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(resolvedApiUrl);
 
         if (!response.ok) {
           throw new Error("Failed to load todos.");
